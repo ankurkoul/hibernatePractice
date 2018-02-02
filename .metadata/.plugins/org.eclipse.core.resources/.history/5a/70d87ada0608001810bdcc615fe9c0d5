@@ -1,0 +1,70 @@
+package pojo;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+@Entity
+public class Author {
+	@Id
+	private int authId;
+	private String name;
+
+	@ManyToMany
+	private Set<Book> books = new HashSet<>();
+	
+	public Author() {
+		super();
+		
+	}
+	public Author(int authId, String name, String publisher) {
+		super();
+		this.authId = authId;
+		this.name = name;
+		this.publisher = publisher;
+	}
+	public Author(int authId, String name, String publisher, Set<Book> books) {
+		super();
+		this.authId = authId;
+		this.name = name;
+		this.publisher = publisher;
+		this.books = books;
+	}
+	
+	
+	public int getAuthId() {
+		return authId;
+	}
+	public String getName() {
+		return name;
+	}
+	public String getPublisher() {
+		return publisher;
+	}
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setAuthId(int authId) {
+		this.authId = authId;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "Author [authId=" + authId + ", name=" + name + ", publisher=" + publisher + ", books=" + books + "]";
+	}
+	
+	
+}

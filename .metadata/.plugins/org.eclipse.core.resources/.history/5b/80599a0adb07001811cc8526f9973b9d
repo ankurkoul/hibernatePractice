@@ -1,0 +1,83 @@
+package day1.demo2.pojo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+
+@Entity
+public class Employee {
+/*	@Id
+	@GeneratedValue(generator="mygen")
+	@SequenceGenerator(name="mygen",sequenceName="seqname",allocationSize=10,initialValue=1)*/
+	@Column(name="empno")
+	private int empNo;
+
+	private String eName;
+	@Column(name="salary")
+	private double salary;
+	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="emp_emails",joinColumns=@JoinColumn(name="empno"))
+	@Column(name="email")
+	private List<String> emails=new ArrayList<>();
+
+	public int getEmpNo() {
+		return empNo;
+	}
+
+	public String geteName() {
+		return eName;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Employee( String eName, double salary, ArrayList<String> emails) {
+		super();
+		
+		this.eName = eName;
+		salary = salary;
+		this.emails = emails;
+	}
+
+	public List<String> getEmails() {
+		return emails;
+	}
+
+	
+	public void seteName(String eName) {
+		this.eName = eName;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+	public void setEmails(ArrayList<String> emails) {
+		this.emails = emails;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [empNo=" + empNo + ", eName=" + eName + ", Salary=" + salary + ", emails=" + emails + "]";
+	}
+
+}

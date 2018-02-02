@@ -1,0 +1,5 @@
+package day1.util;
+
+public class HibernateUtil {
+
+}

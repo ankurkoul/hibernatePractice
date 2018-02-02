@@ -1,0 +1,12 @@
+package tester;
+
+import dao.CombineDAO;
+
+public class Client {
+
+	public static void main(String[] args) {
+		CombineDAO.create();
+
+	}
+
+}

@@ -1,0 +1,26 @@
+
+import java.util.ArrayList;
+import java.util.List;
+
+import day1.demo2.dao.EmployeeDAO;
+import day1.demo2.pojo.Employee;
+
+public class Client {
+
+	public static void main(String[] args) {
+		EmployeeDAO dao = new EmployeeDAO();
+		ArrayList<String> list=new ArrayList<String>();
+		list.add("a@gmail.com");
+	Employee employee=new Employee( "a", 100.05D, list);
+		dao.create(employee);
+		list.add("abc...@gmail.com");
+		Employee employee2=new Employee( "b", 200.05D, list);
+		dao.create(employee2);
+		
+		dao.list().forEach(item->System.out.println(item));
+		
+		dao.listMinMax("100, "200").forEach(item->System.out.println(item));
+		//dao.delete(employee2);
+	//	dao.list().forEach(item->System.out.println(item));
+	}
+}

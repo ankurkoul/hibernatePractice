@@ -1,0 +1,14 @@
+package pojo;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Id;
+
+public class Author {
+	@Id
+	private int authId;
+	private String bkName;
+	private String publisher;
+	private Set<Author> authors = new HashSet<>();
+}

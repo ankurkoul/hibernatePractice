@@ -1,0 +1,72 @@
+package day1.demo2.pojo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Employee {
+	@Id
+	private int empNo;
+
+	private String eName;
+
+	private double Salary;
+
+	private ArrayList<String> emails;
+
+	public int getEmpNo() {
+		return empNo;
+	}
+
+	public String geteName() {
+		return eName;
+	}
+
+	public double getSalary() {
+		return Salary;
+	}
+
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Employee(int empNo, String eName, double salary, ArrayList<String> emails) {
+		super();
+		this.empNo = empNo;
+		this.eName = eName;
+		Salary = salary;
+		this.emails = emails;
+	}
+
+	public List<String> getEmails() {
+		return emails;
+	}
+
+	public void setEmpNo(int empNo) {
+		this.empNo = empNo;
+	}
+
+	public void seteName(String eName) {
+		this.eName = eName;
+	}
+
+	public void setSalary(double salary) {
+		Salary = salary;
+	}
+
+	public void setEmails(ArrayList<String> emails) {
+		this.emails = emails;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [empNo=" + empNo + ", eName=" + eName + ", Salary=" + Salary + ", emails=" + emails + "]";
+	}
+
+}

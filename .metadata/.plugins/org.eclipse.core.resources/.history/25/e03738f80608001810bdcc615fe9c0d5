@@ -1,0 +1,79 @@
+package dao;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import pojo.Author;
+import pojo.Book;
+import util.HibernateUtil;
+
+public class CombineDAO {
+	
+	private static SessionFactory sf = HibernateUtil.getSessionFactory();
+
+	private static Session session = null;
+	private static Transaction tx = null;
+
+	public static void create() {
+
+		Book book1s=new Book(1, "aaaaaa", "publisher1");
+		Book book2=new Book(2, "bbbbb", "publisher2");
+		Book book3=new Book(3, "ccccc", "publisher3");
+		
+		
+		
+		Author author1=new Author(1, "Author1");
+		Author author2=new Author(1, "Author1");
+		Author author3=new Author(1, "Author1");
+		/*
+		 * dept.getEmps().add(emp1); dept.getEmps().add(emp2);
+		 */
+
+		try {
+			session = sf.openSession();
+			tx = session.beginTransaction();
+			/*
+			 * here dept not exist therfore select query select dept_.deptID,
+			 * dept_.deptName as deptName2_0_, dept_.loc as loc3_0_ from
+			 * departmentTable dept_ where dept_.deptID=? now create emp without
+			 * dept and after dept insertion will update emp
+			 * 
+			 */
+			/*
+			 * session.save(emp1); session.save(emp2); session.save(dept);
+			 * tx.commit();
+			 */
+
+			/*
+			 *
+			 * Hibernate: insert into departmentTable (deptName, loc, deptID)
+			 * values (?, ?, ?) Hibernate: insert into EmployeeTable (deptFk,
+			 * eName, salary, empNo) values (?, ?, ?, ?) Hibernate: insert into
+			 * EmployeeTable (deptFk, eName, salary, empNo) values (?, ?, ?, ?)
+			 */
+			/*
+			 * session.save(dept); session.save(emp1); session.save(emp2);
+			 */
+
+			session.save(dept);
+			session.save(emp1);
+			session.save(emp2);
+
+			session.save(dept2);
+			session.save(emp3);
+			session.save(emp4);
+			session.save(emp5);
+
+			session.save(dept3);
+			session.save(dept4);
+			session.save(emp6);
+
+			tx.commit();
+		} catch (Exception exception) {
+
+		} finally {
+			session.close();
+		}
+	}
+}

@@ -1,0 +1,45 @@
+package demo;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Dept {
+	
+	@Id
+	private int deptNo;
+	private String dName;
+	private String ioc;
+	public int getDeptNo() {
+		return deptNo;
+	}
+	public String getdName() {
+		return dName;
+	}
+	public String getIoc() {
+		return ioc;
+	}
+	public void setDeptNo(int deptNo) {
+		this.deptNo = deptNo;
+	}
+	public void setdName(String dName) {
+		this.dName = dName;
+	}
+	public void setIoc(String ioc) {
+		this.ioc = ioc;
+	}
+	public Dept(int deptNo, String dName, String ioc) {
+		super();
+		this.deptNo = deptNo;
+		this.dName = dName;
+		this.ioc = ioc;
+	}
+	public Dept() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+
+}

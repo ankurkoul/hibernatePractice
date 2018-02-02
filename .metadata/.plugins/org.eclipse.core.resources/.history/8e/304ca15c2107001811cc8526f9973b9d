@@ -1,0 +1,28 @@
+package demo;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Dept {
+
+	@Id
+	private int deptNo;
+	private String dName;
+	private String loc;
+
+	public int getDeptNo() {
+		return deptNo;
+	}
+
+	public String getdName() {
+		return dName;
+	}
+
+	
+	public Dept() {
+		super();
+	
+	}
+
+}

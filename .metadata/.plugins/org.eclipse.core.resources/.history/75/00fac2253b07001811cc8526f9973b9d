@@ -1,0 +1,5 @@
+package day1.demo2.dao;
+
+public class EmployeeDAO {
+
+}

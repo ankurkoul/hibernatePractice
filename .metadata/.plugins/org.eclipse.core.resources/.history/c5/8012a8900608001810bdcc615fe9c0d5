@@ -1,0 +1,88 @@
+package dao;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import pojo.Dept;
+import pojo.Employee;
+import util.HibernateUtil;
+
+public class CombineDAO {
+	
+	private static SessionFactory sf = HibernateUtil.getSessionFactory();
+
+	private static Session session = null;
+	private static Transaction tx = null;
+
+	public static void create() {
+
+		Dept dept = new Dept(10, "HR", "pune");
+		Employee emp1 = new Employee(1, "abc", 1000);
+		Employee emp2 = new Employee(2, "xyz", 2000);
+		emp1.setDept(dept);
+		emp2.setDept(dept);
+
+		Dept dept2 = new Dept(11, "PMO", "HYD");
+		Employee emp3 = new Employee(3, "abc3", 3000);
+		Employee emp4 = new Employee(4, "xyz4", 4000);
+		Employee emp5 = new Employee(5, "abc5", 5000);
+		emp3.setDept(dept2);
+		emp4.setDept(dept2);
+		emp5.setDept(dept2);
+
+		Dept dept3 = new Dept(12, "Training", "NYD");
+		Dept dept4 = new Dept(13, "JAVA", "PUNE");
+		Employee emp6 = new Employee(6, "xyz6", 6000);
+		emp6.setDept(dept4);
+		/*
+		 * dept.getEmps().add(emp1); dept.getEmps().add(emp2);
+		 */
+
+		try {
+			session = sf.openSession();
+			tx = session.beginTransaction();
+			/*
+			 * here dept not exist therfore select query select dept_.deptID,
+			 * dept_.deptName as deptName2_0_, dept_.loc as loc3_0_ from
+			 * departmentTable dept_ where dept_.deptID=? now create emp without
+			 * dept and after dept insertion will update emp
+			 * 
+			 */
+			/*
+			 * session.save(emp1); session.save(emp2); session.save(dept);
+			 * tx.commit();
+			 */
+
+			/*
+			 *
+			 * Hibernate: insert into departmentTable (deptName, loc, deptID)
+			 * values (?, ?, ?) Hibernate: insert into EmployeeTable (deptFk,
+			 * eName, salary, empNo) values (?, ?, ?, ?) Hibernate: insert into
+			 * EmployeeTable (deptFk, eName, salary, empNo) values (?, ?, ?, ?)
+			 */
+			/*
+			 * session.save(dept); session.save(emp1); session.save(emp2);
+			 */
+
+			session.save(dept);
+			session.save(emp1);
+			session.save(emp2);
+
+			session.save(dept2);
+			session.save(emp3);
+			session.save(emp4);
+			session.save(emp5);
+
+			session.save(dept3);
+			session.save(dept4);
+			session.save(emp6);
+
+			tx.commit();
+		} catch (Exception exception) {
+
+		} finally {
+			session.close();
+		}
+	}
+}

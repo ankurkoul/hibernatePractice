@@ -1,0 +1,44 @@
+package day1.util;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+import day1.pojo.Client;
+
+public class HibernateUtil {
+
+	private static SessionFactory sessionFactory;
+
+	public static SessionFactory getSessionFactory() {
+		
+		return sessionFactory;
+	}
+
+	protected  HibernateUtil() {
+	
+			StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+			    .configure( "org/hibernate/example/hibernate.cfg.xml" )
+			    .build();
+
+			Metadata metadata = new MetadataSources( standardRegistry )
+			    .addAnnotatedClass( Client.class )
+			    .addAnnotatedClassName( "org.hibernate.example.Customer" )
+			    .addResource( "org/hibernate/example/Order.hbm.xml" )
+			    .addResource( "org/hibernate/example/Product.orm.xml" )
+			    .getMetadataBuilder()
+			    .applyImplicitNamingStrategy( ImplicitNamingStrategyJpaCompliantImpl.INSTANCE )
+			    .build();
+
+			 sessionFactory = metadata.getSessionFactoryBuilder().build();
+		}
+
+
+
+
+	
+	
+}

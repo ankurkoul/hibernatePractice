@@ -1,0 +1,95 @@
+package day1.demo2.dao;
+
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import day1.demo2.pojo.Employee;
+import day1.demo2.util.HibernateUtil;
+
+public class EmployeeDAO {
+	private static SessionFactory sf=HibernateUtil.getSessionFactory();
+	
+	public void create(Employee emp){
+		
+		Session session=null;
+		Transaction tx=null;
+		
+		try{
+			session=sf.openSession();
+			tx=session.getTransaction();
+			tx.begin();
+			session.save(emp);
+			tx.commit();
+		}catch (Exception e) {
+			// TODO: handle exception
+			tx.rollback();
+		}finally {
+			session.close();
+		}
+			
+		}
+	
+	
+	public List<Employee> list(){
+		Session session=null;
+		
+		try{
+			session=sf.openSession();
+			Query<Employee> query=session.createQuery("select d from Employee d");
+			List<Employee> list=query.list();
+			return list;
+		}finally {
+			session.close();
+		}
+	}
+
+	
+	public void update(Employee emp)	{
+		Session session=null;
+		Transaction tx=null;
+		try{
+			session=sf.openSession();
+			session.beginTransaction();
+			Employee e=session.get(Employee.class,emp.getEmpNo());			
+			System.out.println(d);
+			e.seteName(emp.geteName());
+			
+			tx.commit();
+		}catch (Exception e) {
+			// TODO: handle exception
+		tx.rollback();
+		}finally {
+			session.close();
+		}
+	}
+	
+	
+	public void delete(Employee emp){
+		Session session=null;
+		Transaction tx=null;
+		try{
+			session=sf.openSession();
+			tx=session.beginTransaction();
+			Employee d=session.get(Employee.class,emp.getEmpNo());	
+			if(d!=null){
+				
+				session.delete(d);
+				System.out.println(d);
+				
+			}
+			
+			
+			
+			tx.commit();
+		}catch (Exception e) {
+			// TODO: handle exception
+		tx.rollback();
+		}finally {
+			session.close();
+		}
+}
+}

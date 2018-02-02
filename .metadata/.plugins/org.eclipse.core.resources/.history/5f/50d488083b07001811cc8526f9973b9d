@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.SessionFactory;
+
+import day1.demo2.dao.EmployeeDAO;
+import day1.demo2.pojo.Employee;
+import day1.util.HibernateUtil;
+import demo.Dept;
+import demo.DeptDAO;
+
+public class Client {
+
+	public static void main(String[] args) {
+		EmployeeDAO dao = new EmployeeDAO();
+		List<String> list=new ArrayList<String>();
+		list.add("a@gmail.com")
+	Employee employee=new Employee(1, "a", 100.05D, list);
+		dao.create(dept);
+
+		Dept dept2 = new Dept(2, "IT", "BGLR");
+
+		dao.create(dept2);
+		
+		dao.list().forEach(item->System.out.println(item));
+		dao.delete(dept2);
+		dao.list().forEach(item->System.out.println(item));
+	}
+}
